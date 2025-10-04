@@ -7,7 +7,11 @@ defmodule Phutilx.MixProject do
       version: "0.1.0",
       elixir: "~> 1.18",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      authors: ["Oscar Zwagers"],
+      source_url: "https://github.com/oscar345/phutilx",
+      name: "Phutilx",
+      description: "A collection of utilities and helpers for Phoenix and Elixir projects."
     ]
   end
 
