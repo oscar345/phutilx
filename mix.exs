@@ -9,8 +9,10 @@ defmodule Phutilx.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       authors: ["Oscar Zwagers"],
+      package: [
+        name: :phutilx
+      ],
       source_url: "https://github.com/oscar345/phutilx",
-      name: "Phutilx",
       description: "A collection of utilities and helpers for Phoenix and Elixir projects."
     ]
   end
