@@ -10,7 +10,9 @@ defmodule Phutilx.MixProject do
       deps: deps(),
       authors: ["Oscar Zwagers"],
       package: [
-        name: :phutilx
+        name: :phutilx,
+        licenses: ["MIT"],
+        links: %{"GitHub" => "https://github.com/oscar345/phutilx"}
       ],
       source_url: "https://github.com/oscar345/phutilx",
       description: "A collection of utilities and helpers for Phoenix and Elixir projects."
@@ -30,7 +32,8 @@ defmodule Phutilx.MixProject do
       {:phoenix, "~> 1.8"},
       {:ecto, "~> 3.13"},
       {:inertia, "~> 2.5.0"},
-      {:gettext, "~> 0.26"}
+      {:gettext, "~> 0.26"},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]

@@ -1,4 +1,4 @@
-# Phutilx
+# Phutilx [![Hex Package](https://img.shields.io/hexpm/v/phutilx)](https://hex.pm/packages/phutilx) [![Hex Docs](https://img.shields.io/badge/docs-green)](https://hexdocs.pm/phutilx/readme.html)
 
 **TODO: Add description**
 
@@ -18,4 +18,3 @@ end
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at <https://hexdocs.pm/phutilx>.
-
