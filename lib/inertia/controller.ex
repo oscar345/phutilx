@@ -7,11 +7,7 @@ defmodule Phutilx.Inertia.Controller do
   @spec render_meta(map()) :: Phoenix.LiveView.Rendered.t()
   @spec render_title(map()) :: Phoenix.LiveView.Rendered.t()
   @spec render_error(map(), String.t()) :: Conn.t()
-  @spec assign_filter(
-          Conn.t(),
-          (-> {:ok, list()} | {:ok, any()} | {:error, Ecto.Changeset.t()}),
-          keyword()
-        ) :: Conn.t()
+  @spec assign_params(Conn.t(), map()) :: Conn.t()
 
   @doc """
   Assign a title to both the normal assigns from plug and to the inertia prop assigns so the title
@@ -75,35 +71,10 @@ defmodule Phutilx.Inertia.Controller do
   end
 
   @doc """
-  Expects a function that returns either a `{:ok, list()}`, `{:ok, %Paginate{}}` or `{:error, changeset}` tuple and
-  assigns the result to the given key as an inertia prop, when the result is `:ok`. Otherwise the key is assigned
-  `nil` and the changeset errors are assigned to the conn using the `Phutilx.Inertia.Errors` struct.
-
-  ## Examples
-
-      iex> assign_filter(conn, :users, fn -> Accounts.list_users(params) end)
-      %Plug.Conn{...}
-
-  ## Options
-    * `:key` - The key to assign the result to, defaults to `:items`.
-    * `:key_error` - The key to assign the errors to, defaults to `:filter`.
-
+  Get the params from the plug function and assign them to the inertia props so they can be used on the client side.
+  This is especially useful when you want to use the params for filtering or pagination.
   """
-  def assign_filter(conn, filter_fun, opts \\ []) do
-    key = Keyword.get(opts, :key, :items)
-    key_error = Keyword.get(opts, :key_error, :filter)
-
-    case filter_fun.() do
-      {:ok, values} ->
-        conn |> Inertia.Controller.assign_prop(key, values)
-
-      {:error, changeset} ->
-        conn
-        |> Inertia.Controller.assign_errors(%Phutilx.Inertia.Errors{
-          changeset: changeset,
-          key: key_error
-        })
-        |> Inertia.Controller.assign_prop(key, nil)
-    end
+  def assign_params(conn, params) do
+    conn |> Inertia.Controller.assign_prop(:params, params)
   end
 end
