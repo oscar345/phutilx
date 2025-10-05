@@ -8,8 +8,6 @@ defmodule Phutilx.Database.Paginate do
           count: integer()
         }
 
-  @spec apply_query(Ecto.Changeset.t(), (map() -> any()), (:error, Ecto.Changeset.t() -> any())) ::
-          any()
   @spec paginate(Ecto.Repo.t(), Ecto.Query.t(), %{page: integer(), size: integer()}) ::
           Phutilx.Database.Paginate.t()
 
@@ -18,7 +16,6 @@ defmodule Phutilx.Database.Paginate do
   consuming the module with use, it will also import the ecto modules needed to create filter schemas and
   importing ecto query functions.
   """
-  alias Ecto.Changeset
   import Ecto.Query
 
   @doc """
@@ -48,20 +45,6 @@ defmodule Phutilx.Database.Paginate do
     end
   end
 
-  @doc """
-  A small helper function which converts a changeset into a schema or a changeset error by using the
-  `apply_action/2` function. The action is set to `:query`. When there are no errors the function passed
-  into the `fun_ok` parameter is called with the schema as argument. When there are errors the function
-  passed into the `fun_error` parameter is called with the error tuple as argument. The `fun_error`
-  parameter defaults to an identity function.
-  """
-  def apply_query(changeset, fun_ok, fun_error \\ fn result -> result end) do
-    case Changeset.apply_action(changeset, :query) do
-      {:ok, params} -> fun_ok.(params)
-      {:error, _changeset} = error -> fun_error.(error)
-    end
-  end
-
   defmacro __using__(_opts) do
     quote do
       import Phutilx.Database.Paginate
@@ -72,6 +55,12 @@ defmodule Phutilx.Database.Paginate do
       Module.register_attribute(__MODULE__, :pagination_options, accumulate: false)
 
       @before_compile Phutilx.Database.Paginate
+
+      def validate(attrs) do
+        %__MODULE__{}
+        |> changeset(attrs)
+        |> apply_action(:validate)
+      end
     end
   end
 
