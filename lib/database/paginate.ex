@@ -8,6 +8,11 @@ defmodule Phutilx.Database.Paginate do
           count: integer()
         }
 
+  @spec apply_query(Ecto.Changeset.t(), (map() -> any()), (:error, Ecto.Changeset.t() -> any())) ::
+          any()
+  @spec paginate(Ecto.Repo.t(), Ecto.Query.t(), %{page: integer(), size: integer()}) ::
+          Phutilx.Database.Paginate.t()
+
   @moduledoc """
   Helps with creating filters on resources in the database by creating a helper macros and function and by
   consuming the module with use, it will also import the ecto modules needed to create filter schemas and

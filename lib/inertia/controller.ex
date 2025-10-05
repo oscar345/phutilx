@@ -2,6 +2,17 @@ defmodule Phutilx.Inertia.Controller do
   alias Plug.Conn
   use Phoenix.Component
 
+  @spec assign_title(Conn.t(), String.t()) :: Conn.t()
+  @spec assign_meta(Conn.t(), list()) :: Conn.t()
+  @spec render_meta(map()) :: Phoenix.LiveView.Rendered.t()
+  @spec render_title(map()) :: Phoenix.LiveView.Rendered.t()
+  @spec render_error(map(), String.t()) :: Conn.t()
+  @spec assign_filter(
+          Conn.t(),
+          (-> {:ok, list()} | {:ok, any()} | {:error, Ecto.Changeset.t()}),
+          keyword()
+        ) :: Conn.t()
+
   @doc """
   Assign a title to both the normal assigns from plug and to the inertia prop assigns so the title
   can be used on the server and on the client.
