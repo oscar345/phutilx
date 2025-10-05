@@ -1,4 +1,16 @@
-defmodule Phutilx.Inertia.Form do
+defmodule Phutilx.Inertia.Errors do
+  @moduledoc """
+  A module to help with sending validation errors to the client when using Inertia.js. You can prepend keys
+  to the errors when you have all your data underneath a key on the client. For example when you have a form
+  for a user, you might want to have all the fields and errors under the `user` key.
+
+  It also makes the experience for returning errors from maps equivalent to returning errors from changesets. So
+  those errors are also flattened and can be prefixed with a key.
+
+  In order to translate the error messages, you need to set the `:gettext_module` configuration option in your
+  `config/config.exs` file. For example: `config :phutilx, :gettext_module, MyAppWeb.Gettext`.
+  """
+
   defstruct key: nil, changeset: nil, map: nil
 
   @type t :: %__MODULE__{
@@ -20,7 +32,7 @@ defmodule Phutilx.Inertia.Form do
 
     @gettext_module Application.compile_env(:phutilx, :gettext_module)
 
-    def to_errors(%Phutilx.Inertia.Form{changeset: %Changeset{} = changeset} = value, fun) do
+    def to_errors(%Phutilx.Inertia.Errors{changeset: %Changeset{} = changeset} = value, fun) do
       errors =
         if fun != nil do
           Inertia.Errors.to_errors(changeset, fun)
@@ -36,7 +48,7 @@ defmodule Phutilx.Inertia.Form do
       end
     end
 
-    def to_errors(%Phutilx.Inertia.Form{changeset: %Changeset{}} = value) do
+    def to_errors(%Phutilx.Inertia.Errors{changeset: %Changeset{}} = value) do
       to_errors(value, fn {msg, opts} ->
         if count = opts[:count] do
           Gettext.dngettext(@gettext_module, "errors", msg, msg, count, opts)
@@ -46,7 +58,7 @@ defmodule Phutilx.Inertia.Form do
       end)
     end
 
-    def to_errors(%Phutilx.Inertia.Form{map: %{} = map} = value) do
+    def to_errors(%Phutilx.Inertia.Errors{map: %{} = map} = value) do
       errors = flatten_map(map)
 
       if value.key == nil do
