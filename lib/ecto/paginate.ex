@@ -1,4 +1,4 @@
-defmodule Phutilx.Database.Paginate do
+defmodule Phutilx.Ecto.Paginate do
   defstruct values: nil, page: 1, size: 10, count: 0
 
   @type t :: %__MODULE__{
@@ -8,15 +8,11 @@ defmodule Phutilx.Database.Paginate do
           count: integer()
         }
 
-  @spec paginate(Ecto.Repo.t(), Ecto.Query.t(), %{page: integer(), size: integer()}) ::
-          Phutilx.Database.Paginate.t()
-
   @moduledoc """
   Helps with creating filters on resources in the database by creating a helper macros and function and by
   consuming the module with use, it will also import the ecto modules needed to create filter schemas and
   importing ecto query functions.
   """
-  import Ecto.Query
 
   @doc """
   A pagination macro that adds the fields `:size` and `:page` to the embedded schema. The default
@@ -47,20 +43,14 @@ defmodule Phutilx.Database.Paginate do
 
   defmacro __using__(_opts) do
     quote do
-      import Phutilx.Database.Paginate
+      import Phutilx.Ecto.Paginate
       use Ecto.Schema
       import Ecto.Changeset
       import Ecto.Query
 
       Module.register_attribute(__MODULE__, :pagination_options, accumulate: false)
 
-      @before_compile Phutilx.Database.Paginate
-
-      def validate(attrs) do
-        %__MODULE__{}
-        |> changeset(attrs)
-        |> apply_action(:validate)
-      end
+      @before_compile Phutilx.Ecto.Paginate
     end
   end
 
@@ -94,20 +84,16 @@ defmodule Phutilx.Database.Paginate do
     end
   end
 
-  def paginate(repo, query, %{page: page, size: size}) do
-    values =
-      query
-      |> limit(^size)
-      |> offset((^page - 1) * ^size)
-      |> repo.all()
+  @doc"""
+  Updates the `:values` field of the given pagination struct using the provided update function.
 
-    count = query |> repo.aggregate(:count, :id)
+  ## Examples
 
-    %__MODULE__{
-      values: values,
-      page: page,
-      size: size,
-      count: count
-    }
+      iex> pagination = %Phutilx.Ecto.Paginate{values: [1, 2, 3], page: 1, size: 3, count: 3}
+      iex> Phutilx.Ecto.Paginate.update_values(pagination, fn values -> Enum.map(values, &(&1 * 2)) end)
+      %Phutilx.Ecto.Paginate{values: [2, 4, 6], page: 1, size: 3, count: 3}
+  """
+  def update_values(%__MODULE__{} = pagination, update_fn) do
+    update_in(pagination, [:values], update_fn)
   end
 end

@@ -10,7 +10,7 @@ defmodule Phutilx.JSON do
     * `:except` - A list of fields to exclude from the JSON output. This option is ignored if `:only`
       is provided. `:__struct__` and `:__meta__` are always excluded.
   """
-  defmacro encoder(opts \\ []) do
+  defmacro json_encoder(opts \\ []) do
     quote do
       defimpl JSON.Encoder do
         def encode(struct, opts) do
