@@ -1,0 +1,563 @@
+14:47:32.817 [debug] Child {XPLoggerFileBackend, :general_log} of Supervisor Logger.Backends.Supervisor started
+Pid: #PID<0.102.0>
+Start Call: Logger.Backends.Watcher.start_link({{XPLoggerFileBackend, :general_log}, {XPLoggerFileBackend, :general_log}})
+Restart: :transient
+Shutdown: 5000
+Type: :worker
+14:47:32.817 [info] Child Logger.Backends.Supervisor of Supervisor Logger.Backends.Internal started
+Pid: #PID<0.101.0>
+Start Call: Logger.Backends.Supervisor.start_link([{XPLoggerFileBackend, :general_log}])
+Restart: :permanent
+Shutdown: :infinity
+Type: :supervisor
+14:47:32.817 [info] Child Logger.Backends.Internal of Supervisor Logger.Supervisor started
+Pid: #PID<0.97.0>
+Start Call: Logger.Backends.Internal.start_link([])
+Restart: :permanent
+Shutdown: :infinity
+Type: :supervisor
+14:47:32.817 [info] Application logger started at :nonode@nohost
+14:47:32.817 [info] Application xp_mime started at :nonode@nohost
+14:47:32.817 [info] Application xp_hpax started at :nonode@nohost
+14:47:32.817 [info] Application crypto started at :nonode@nohost
+14:47:32.817 [info] Application asn1 started at :nonode@nohost
+14:47:32.817 [info] Application public_key started at :nonode@nohost
+14:47:32.818 [debug] Child :ssl_handler of Supervisor :logger_sup started
+Pid: #PID<0.107.0>
+Start Call: :logger_olp.start_link(:logger_std_h_ssl_handler, :logger_h_common, %{id: :ssl_handler, module: :logger_std_h, config: %{type: :standard_io, filesync_repeat_interval: :no_repeat}, level: :debug, filter_default: :stop, filters: [], formatter: {:ssl_logger, %{}}}, %{})
+Restart: :temporary
+Shutdown: 2000
+Type: :worker
+14:47:32.821 [info] Child :ssl_pem_cache of Supervisor :ssl_admin_sup started
+Pid: #PID<0.111.0>
+Start Call: :ssl_pem_cache.start_link([])
+Restart: :permanent
+Shutdown: 4000
+Type: :worker
+14:47:32.823 [info] Child :ssl_manager of Supervisor :ssl_admin_sup started
+Pid: #PID<0.112.0>
+Start Call: :ssl_manager.start_link([])
+Restart: :permanent
+Shutdown: 4000
+Type: :worker
+14:47:32.824 [info] Child :tls_client_ticket_store of Supervisor :ssl_admin_sup started
+Pid: #PID<0.113.0>
+Start Call: :tls_client_ticket_store.start_link(1000, 7200)
+Restart: :permanent
+Shutdown: 4000
+Type: :worker
+14:47:32.824 [info] Child :ssl_admin_sup of Supervisor :ssl_sup started
+Pid: #PID<0.110.0>
+Start Call: :ssl_admin_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+14:47:32.825 [info] Child :tls_connection_sup of Supervisor :tls_sup started
+Pid: #PID<0.116.0>
+Start Call: :tls_connection_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+14:47:32.826 [info] Child :ssl_listen_tracker_sup of Supervisor :tls_server_sup started
+Pid: #PID<0.118.0>
+Start Call: :ssl_listen_tracker_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+14:47:32.826 [info] Child :tls_server_session_ticket of Supervisor :tls_server_sup started
+Pid: #PID<0.119.0>
+Start Call: :tls_server_session_ticket_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+14:47:32.827 [info] Child :ssl_server_session_cache_sup of Supervisor :tls_server_sup started
+Pid: #PID<0.120.0>
+Start Call: :ssl_server_session_cache_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+14:47:32.827 [info] Child :ssl_upgrade_server_session_cache_sup of Supervisor :tls_server_sup started
+Pid: #PID<0.121.0>
+Start Call: :ssl_upgrade_server_session_cache_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+14:47:32.827 [info] Child :tls_server_sup of Supervisor :tls_sup started
+Pid: #PID<0.117.0>
+Start Call: :tls_server_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+14:47:32.827 [info] Child :tls_sup of Supervisor :ssl_connection_sup started
+Pid: #PID<0.115.0>
+Start Call: :tls_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+14:47:32.828 [info] Child :dtls_connection_sup of Supervisor :dtls_sup started
+Pid: #PID<0.123.0>
+Start Call: :dtls_connection_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+14:47:32.828 [info] Child :dtls_listener_sup of Supervisor :dtls_server_sup started
+Pid: #PID<0.125.0>
+Start Call: :dtls_listener_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+14:47:32.829 [info] Child :dtls_server_session_cache_sup of Supervisor :dtls_server_sup started
+Pid: #PID<0.126.0>
+Start Call: :dtls_server_session_cache_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+14:47:32.829 [info] Child :dtls_server_sup of Supervisor :dtls_sup started
+Pid: #PID<0.124.0>
+Start Call: :dtls_server_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+14:47:32.829 [info] Child :dtls_sup of Supervisor :ssl_connection_sup started
+Pid: #PID<0.122.0>
+Start Call: :dtls_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+14:47:32.829 [info] Child :ssl_connection_sup of Supervisor :ssl_sup started
+Pid: #PID<0.114.0>
+Start Call: :ssl_connection_sup.start_link()
+Restart: :permanent
+Shutdown: 4000
+Type: :supervisor
+14:47:32.829 [info] Application ssl started at :nonode@nohost
+14:47:32.830 [info] Application xp_mint started at :nonode@nohost
+14:47:32.830 [info] Application xp_nimble_options started at :nonode@nohost
+14:47:32.832 [info] Child XPNimblePool.TaskSupervisor of Supervisor #PID<0.132.0> (Supervisor.Default) started
+Pid: #PID<0.133.0>
+Start Call: Task.Supervisor.start_link([name: XPNimblePool.TaskSupervisor])
+Restart: :permanent
+Shutdown: :infinity
+Type: :supervisor
+14:47:32.832 [info] Application xp_nimble_pool started at :nonode@nohost
+14:47:32.833 [info] Child :telemetry_handler_table of Supervisor :telemetry_sup started
+Pid: #PID<0.137.0>
+Start Call: :telemetry_handler_table.start_link()
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+14:47:32.833 [info] Application xp_telemetry started at :nonode@nohost
+14:47:32.833 [info] Application xp_finch started at :nonode@nohost
+14:47:32.845 [info] Child XPReq.Finch.PIDPartition0 of Supervisor XPReq.Finch started
+Pid: #PID<0.143.0>
+Start Call: Registry.Partition.start_link(XPReq.Finch.PIDPartition0, {:duplicate, XPReq.Finch, 0, 1, XPReq.Finch.KeyPartition0, XPReq.Finch.PIDPartition0, [], false})
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+14:47:32.845 [info] Child XPReq.Finch of Supervisor XPReq.Finch.Supervisor started
+Pid: #PID<0.142.0>
+Start Call: Registry.start_link([keys: :duplicate, name: XPReq.Finch, meta: [config: %{pools: %{}, registry_name: XPReq.Finch, supervisor_name: XPReq.Finch.PoolSupervisor, manager_name: XPReq.Finch.PoolManager, default_pool_config: %{count: 1, size: 50, mod: XPFinch.HTTP1.Pool, conn_opts: [protocols: [:http1], transport_opts: [keepalive: true, nodelay: true, timeout: 5000], ssl_key_log_file_device: nil], pool_max_idle_time: :infinity, conn_max_idle_time: :infinity, start_pool_metrics?: false}}]])
+Restart: :permanent
+Shutdown: :infinity
+Type: :supervisor
+14:47:32.845 [info] Child XPReq.Finch.PoolSupervisor of Supervisor XPReq.Finch.Supervisor started
+Pid: #PID<0.144.0>
+Start Call: DynamicSupervisor.start_link([name: XPReq.Finch.PoolSupervisor, strategy: :one_for_one])
+Restart: :permanent
+Shutdown: :infinity
+Type: :supervisor
+14:47:32.845 [info] Child XPFinch.PoolManager of Supervisor XPReq.Finch.Supervisor started
+Pid: #PID<0.145.0>
+Start Call: XPFinch.PoolManager.start_link(%{pools: %{}, registry_name: XPReq.Finch, supervisor_name: XPReq.Finch.PoolSupervisor, manager_name: XPReq.Finch.PoolManager, default_pool_config: %{count: 1, size: 50, mod: XPFinch.HTTP1.Pool, conn_opts: [protocols: [:http1], transport_opts: [keepalive: true, nodelay: true, timeout: 5000], ssl_key_log_file_device: nil], pool_max_idle_time: :infinity, conn_max_idle_time: :infinity, start_pool_metrics?: false}})
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+14:47:32.846 [info] Child XPReq.Finch of Supervisor #PID<0.140.0> (Supervisor.Default) started
+Pid: #PID<0.141.0>
+Start Call: XPFinch.start_link([name: XPReq.Finch, pools: %{default: [protocols: [:http1]]}])
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+14:47:32.846 [info] Child XPReq.FinchSupervisor of Supervisor #PID<0.140.0> (Supervisor.Default) started
+Pid: #PID<0.146.0>
+Start Call: DynamicSupervisor.start_link([strategy: :one_for_one, name: XPReq.FinchSupervisor])
+Restart: :permanent
+Shutdown: :infinity
+Type: :supervisor
+14:47:32.846 [info] Child XPReq.Test.Ownership of Supervisor #PID<0.140.0> (Supervisor.Default) started
+Pid: #PID<0.147.0>
+Start Call: XPReq.Test.Ownership.start_link([name: XPReq.Test.Ownership])
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+14:47:32.846 [info] Application xp_req started at :nonode@nohost
+14:47:32.846 [info] Application burrito started at :nonode@nohost
+14:47:32.846 [info] Application erts started at :nonode@nohost
+14:47:32.846 [info] Application xp_schematic started at :nonode@nohost
+14:47:32.846 [info] Application xp_typed_struct started at :nonode@nohost
+14:47:32.846 [info] Application xp_gen_lsp started at :nonode@nohost
+14:47:32.851 [info] Child XPSnowflake.Generator of Supervisor #PID<0.150.0> (Supervisor.Default) started
+Pid: #PID<0.151.0>
+Start Call: XPSnowflake.Generator.start_link(0, 1023)
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+14:47:32.851 [info] Application xp_snowflake started at :nonode@nohost
+14:47:32.851 [info] Application xp_sourceror started at :nonode@nohost
+14:47:32.851 [info] Application xp_forge started at :nonode@nohost
+14:47:32.851 [info] Application xp_logger_file_backend started at :nonode@nohost
+14:47:32.854 [info] Child :ttb_autostart of Supervisor :runtime_tools_sup started
+Pid: #PID<0.155.0>
+Start Call: :ttb_autostart.start_link()
+Restart: :temporary
+Shutdown: 3000
+Type: :worker
+14:47:32.854 [info] Application runtime_tools started at :nonode@nohost
+14:47:32.854 [info] Application et started at :nonode@nohost
+14:47:32.854 [info] Application observer started at :nonode@nohost
+14:47:32.854 [info] Application xp_path_glob started at :nonode@nohost
+14:47:32.861 [info] Child XPForge.Document.Store of Supervisor XPExpert.Supervisor started
+Pid: #PID<0.159.0>
+Start Call: XPForge.Document.Store.start_link([derive: [analysis: &XPForge.Ast.analyze/1]])
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+14:47:32.861 [info] Child XPExpert.ProjectSupervisor of Supervisor XPExpert.Supervisor started
+Pid: #PID<0.160.0>
+Start Call: DynamicSupervisor.start_link([name: XPExpert.ProjectSupervisor, strategy: :one_for_one])
+Restart: :permanent
+Shutdown: :infinity
+Type: :supervisor
+14:47:32.861 [info] Child XPExpert.DynamicSupervisor of Supervisor XPExpert.Supervisor started
+Pid: #PID<0.161.0>
+Start Call: DynamicSupervisor.start_link([name: XPExpert.DynamicSupervisor])
+Restart: :permanent
+Shutdown: :infinity
+Type: :supervisor
+14:47:32.863 [info] Child XPGenLSP.Assigns of Supervisor XPExpert.Supervisor started
+Pid: #PID<0.162.0>
+Start Call: XPGenLSP.Assigns.start_link([name: XPExpert.Assigns])
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+14:47:32.863 [info] Child :expert_task_queue of Supervisor XPExpert.Supervisor started
+Pid: #PID<0.163.0>
+Start Call: Task.Supervisor.start_link([name: :expert_task_queue])
+Restart: :permanent
+Shutdown: :infinity
+Type: :supervisor
+14:47:32.863 [info] Child XPGenLSP.Buffer of Supervisor XPExpert.Supervisor started
+Pid: #PID<0.164.0>
+Start Call: XPGenLSP.Buffer.start_link([name: XPExpert.Buffer])
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+14:47:32.863 [debug] [name: XPExpert, buffer: XPExpert.Buffer, task_supervisor: :expert_task_queue, dynamic_supervisor: XPExpert.DynamicSupervisor, assigns: XPExpert.Assigns]
+14:47:32.867 [info] Child XPExpert of Supervisor XPExpert.Supervisor started
+Pid: #PID<0.165.0>
+Start Call: XPExpert.start_link([name: XPExpert, buffer: XPExpert.Buffer, task_supervisor: :expert_task_queue, dynamic_supervisor: XPExpert.DynamicSupervisor, assigns: XPExpert.Assigns])
+Restart: :permanent
+Shutdown: 500
+Type: :worker
+14:47:32.867 [info] Application xp_expert started at :nonode@nohost
+14:47:32.917 [info] Starting project at uri file:///Users/oscarzwagers/Developer/Projects/phutilx
+14:47:32.924 [info] Child {XPExpert.Project.Progress, "phutilx"} of Supervisor :"phutilx::supervisor" started
+Pid: #PID<0.170.0>
+Start Call: XPExpert.Project.Progress.start_link(%XPForge.Project{root_uri: "file:///Users/oscarzwagers/Developer/Projects/phutilx", mix_exs_uri: "file:///Users/oscarzwagers/Developer/Projects/phutilx/mix.exs", mix_project?: true, mix_env: nil, mix_target: nil, env_variables: %{}, project_module: nil, entropy: 38609})
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+14:47:32.925 [info] Child {XPExpert.EngineSupervisor, "phutilx"} of Supervisor :"phutilx::supervisor" started
+Pid: #PID<0.171.0>
+Start Call: XPExpert.EngineSupervisor.start_link(%XPForge.Project{root_uri: "file:///Users/oscarzwagers/Developer/Projects/phutilx", mix_exs_uri: "file:///Users/oscarzwagers/Developer/Projects/phutilx/mix.exs", mix_project?: true, mix_env: nil, mix_target: nil, env_variables: %{}, project_module: nil, entropy: 38609})
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+14:47:32.927 [debug] sent request server -> client window/workDoneProgress/create
+14:47:32.932 [debug] sent notification server -> client $/progress
+14:47:32.933 [info] Child :erl_epmd of Supervisor :net_sup started
+Pid: #PID<0.174.0>
+Start Call: :erl_epmd.start_link()
+Restart: :permanent
+Shutdown: 2000
+Type: :worker
+14:47:32.934 [info] Child :auth of Supervisor :net_sup started
+Pid: #PID<0.175.0>
+Start Call: :auth.start_link()
+Restart: :permanent
+Shutdown: 2000
+Type: :worker
+14:47:32.940 [info] Child :net_kernel of Supervisor :net_sup started
+Pid: #PID<0.176.0>
+Start Call: :net_kernel.start_link(%{name: :"manager-phutilx-38609@127.0.0.1", supervisor: :net_sup_dynamic, name_domain: :longnames, clean_halt: false})
+Restart: :permanent
+Shutdown: 2000
+Type: :worker
+14:47:32.940 [debug] Child :net_sup_dynamic of Supervisor :kernel_sup started
+Pid: #PID<0.173.0>
+Start Call: :erl_distribution.start_link(%{name: :"manager-phutilx-38609@127.0.0.1", supervisor: :net_sup_dynamic, name_domain: :longnames, clean_halt: false})
+Restart: :permanent
+Shutdown: 1000
+Type: :supervisor
+14:47:32.968 [debug] handled request client -> server initialize in 95ms
+14:47:32.973 [debug] sent request server -> client client/registerCapability
+14:47:32.977 [debug] handled notification client -> server workspace/didChangeConfiguration in 8ms
+14:47:32.979 [info] ################### opened file:///Users/oscarzwagers/Developer/Projects/phutilx/mix.exs
+14:47:32.979 [info] ################### opened file:///Users/oscarzwagers/Developer/Projects/phutilx/lib/json.ex
+14:47:32.979 [debug] handled notification client -> server textDocument/didOpen in 9ms
+14:47:32.979 [info] ################### opened file:///Users/oscarzwagers/Developer/Projects/phutilx/lib/database/paginate.ex
+14:47:32.979 [debug] handled notification client -> server textDocument/didOpen in 10ms
+14:47:32.979 [debug] handled notification client -> server textDocument/didOpen in 9ms
+14:47:32.979 [info] ################### opened file:///Users/oscarzwagers/Developer/Projects/phutilx/lib/inertia/controller.ex
+14:47:32.979 [debug] handled notification client -> server textDocument/didOpen in 10ms
+14:47:32.980 [info] ################### opened file:///Users/oscarzwagers/Developer/Projects/phutilx/deps/inertia/lib/inertia/controller.ex
+14:47:32.980 [info] ################### opened file:///Users/oscarzwagers/Developer/Projects/phutilx/lib/inertia/errors.ex
+14:47:32.980 [debug] handled notification client -> server textDocument/didOpen in 8ms
+14:47:32.980 [debug] handled notification client -> server textDocument/didOpen in 9ms
+14:47:32.980 [info] ################### opened file:///Users/oscarzwagers/Developer/Projects/phutilx/lib/phutilx.ex
+14:47:32.980 [debug] handled notification client -> server textDocument/didOpen in 11ms
+14:47:32.989 [debug] handled notification client -> server initialized in 20ms
+14:47:32.993 [debug] sent notification server -> client window/logMessage
+14:47:32.995 [debug] sent request server -> client window/workDoneProgress/create
+14:47:32.995 [debug] sent notification server -> client $/progress
+16:03:15.188 [info] Child of Supervisor :inet_gethost_native_sup started
+Pid: #PID<0.201.0>
+Start Call: :inet_gethost_native.init([])
+16:03:15.189 [debug] Child :inet_gethost_native_sup of Supervisor :kernel_safe_sup started
+Pid: #PID<0.200.0>
+Start Call: :inet_gethost_native.start_link()
+Restart: :temporary
+Shutdown: 1000
+Type: :worker
+16:03:15.197 [error] ** (ErlangError) Erlang error: {:erpc, :noconnection}
+    (kernel 10.2.7.1) erpc.erl:1376: :erpc.call/5
+    (xp_expert 0.1.0-dca68d8) lib/expert/state.ex:122: XPExpert.State.apply/2
+    (xp_expert 0.1.0-dca68d8) lib/expert.ex:200: XPExpert.apply_to_state/2
+    (xp_expert 0.1.0-dca68d8) lib/expert.ex:139: XPExpert.handle_notification/2
+    (xp_gen_lsp 0.11.1) lib/gen_lsp.ex:519: anonymous fn/2 in XPGenLSP.loop/3
+    (xp_telemetry 1.3.0) /home/runner/work/expert/expert/apps/expert/deps/telemetry/src/telemetry.erl:324: :xp_telemetry.span/3
+    (xp_gen_lsp 0.11.1) lib/gen_lsp.ex:515: anonymous fn/4 in XPGenLSP.loop/3
+    (xp_gen_lsp 0.11.1) lib/gen_lsp.ex:592: anonymous fn/4 in XPGenLSP.attempt/4
+
+16:03:15.197 [debug] sent notification server -> client window/logMessage
+16:03:15.197 [warning] client -> server notification crashed
+16:03:15.197 [error] ** (ErlangError) Erlang error: {:erpc, :noconnection}
+    (kernel 10.2.7.1) erpc.erl:1376: :erpc.call/5
+    (elixir 1.17.3) lib/enum.ex:987: Enum."-each/2-lists^foreach/1-0-"/2
+    (xp_expert 0.1.0-dca68d8) lib/expert/state.ex:196: XPExpert.State.apply/2
+    (xp_expert 0.1.0-dca68d8) lib/expert.ex:200: XPExpert.apply_to_state/2
+    (xp_expert 0.1.0-dca68d8) lib/expert.ex:139: XPExpert.handle_notification/2
+    (xp_gen_lsp 0.11.1) lib/gen_lsp.ex:519: anonymous fn/2 in XPGenLSP.loop/3
+    (xp_telemetry 1.3.0) /home/runner/work/expert/expert/apps/expert/deps/telemetry/src/telemetry.erl:324: :xp_telemetry.span/3
+    (xp_gen_lsp 0.11.1) lib/gen_lsp.ex:515: anonymous fn/4 in XPGenLSP.loop/3
+
+16:03:15.197 [debug] sent notification server -> client window/logMessage
+16:03:15.197 [warning] client -> server notification crashed
+16:03:15.399 [debug] sent notification server -> client window/logMessage
+16:03:15.399 [debug] handled request client -> server textDocument/codeAction in 9ms
+16:03:15.425 [debug] sent notification server -> client window/logMessage
+16:03:15.425 [debug] handled request client -> server textDocument/codeLens in 2ms
+16:05:15.614 [debug] handled notification client -> server $/cancelRequest in 10ms
+16:05:15.615 [debug] handled notification client -> server $/cancelRequest in 9ms
+16:54:23.359 [debug] handled notification client -> server workspace/didChangeConfiguration in 4ms
+16:54:23.366 [debug] handled notification client -> server workspace/didChangeConfiguration in 125µs
+16:54:23.862 [debug] handled notification client -> server workspace/didChangeConfiguration in 121µs
+16:54:23.878 [debug] handled notification client -> server workspace/didChangeConfiguration in 144µs
+16:54:24.156 [debug] handled notification client -> server workspace/didChangeConfiguration in 115µs
+16:54:24.167 [debug] handled notification client -> server workspace/didChangeConfiguration in 134µs
+16:54:24.760 [debug] handled notification client -> server workspace/didChangeConfiguration in 120µs
+16:54:24.776 [debug] handled notification client -> server workspace/didChangeConfiguration in 123µs
+16:54:26.683 [debug] handled notification client -> server workspace/didChangeConfiguration in 153µs
+16:54:26.696 [debug] handled notification client -> server workspace/didChangeConfiguration in 113µs
+16:54:27.151 [debug] handled notification client -> server workspace/didChangeConfiguration in 165µs
+16:54:27.178 [debug] handled notification client -> server workspace/didChangeConfiguration in 114µs
+16:54:27.250 [debug] handled notification client -> server workspace/didChangeConfiguration in 162µs
+16:54:27.251 [debug] handled notification client -> server workspace/didChangeConfiguration in 47µs
+16:54:27.330 [debug] handled notification client -> server workspace/didChangeConfiguration in 111µs
+16:54:27.331 [debug] handled notification client -> server workspace/didChangeConfiguration in 1ms
+16:54:27.398 [debug] handled notification client -> server workspace/didChangeConfiguration in 93µs
+16:54:27.400 [debug] handled notification client -> server workspace/didChangeConfiguration in 66µs
+16:54:27.501 [debug] handled notification client -> server workspace/didChangeConfiguration in 99µs
+16:54:27.515 [debug] handled notification client -> server workspace/didChangeConfiguration in 75µs
+16:54:27.664 [debug] handled notification client -> server workspace/didChangeConfiguration in 91µs
+16:54:27.688 [debug] handled notification client -> server workspace/didChangeConfiguration in 91µs
+16:54:28.295 [debug] handled notification client -> server workspace/didChangeConfiguration in 136µs
+16:54:28.316 [debug] handled notification client -> server workspace/didChangeConfiguration in 150µs
+16:54:28.545 [debug] handled notification client -> server workspace/didChangeConfiguration in 186µs
+16:54:28.572 [debug] handled notification client -> server workspace/didChangeConfiguration in 119µs
+16:54:29.228 [debug] handled notification client -> server workspace/didChangeConfiguration in 452µs
+16:54:29.244 [debug] handled notification client -> server workspace/didChangeConfiguration in 174µs
+16:54:29.498 [debug] handled notification client -> server workspace/didChangeConfiguration in 236µs
+16:54:29.509 [debug] handled notification client -> server workspace/didChangeConfiguration in 84µs
+16:54:29.817 [debug] handled notification client -> server workspace/didChangeConfiguration in 90µs
+16:54:29.839 [debug] handled notification client -> server workspace/didChangeConfiguration in 120µs
+16:54:30.004 [debug] handled notification client -> server workspace/didChangeConfiguration in 139µs
+16:54:30.020 [debug] handled notification client -> server workspace/didChangeConfiguration in 89µs
+16:54:30.483 [debug] handled notification client -> server workspace/didChangeConfiguration in 144µs
+16:54:30.499 [debug] handled notification client -> server workspace/didChangeConfiguration in 133µs
+16:54:31.146 [debug] handled notification client -> server workspace/didChangeConfiguration in 196µs
+16:54:31.167 [debug] handled notification client -> server workspace/didChangeConfiguration in 212µs
+16:54:31.401 [debug] handled notification client -> server workspace/didChangeConfiguration in 140µs
+16:54:31.413 [debug] handled notification client -> server workspace/didChangeConfiguration in 89µs
+16:54:31.940 [debug] handled notification client -> server workspace/didChangeConfiguration in 130µs
+16:54:31.979 [debug] handled notification client -> server workspace/didChangeConfiguration in 125µs
+16:54:32.006 [debug] handled notification client -> server workspace/didChangeConfiguration in 101µs
+16:54:32.086 [debug] handled notification client -> server workspace/didChangeConfiguration in 1ms
+16:54:32.086 [debug] handled notification client -> server workspace/didChangeConfiguration in 41µs
+16:54:32.162 [debug] handled notification client -> server workspace/didChangeConfiguration in 267µs
+16:54:32.182 [debug] handled notification client -> server workspace/didChangeConfiguration in 93µs
+16:54:32.245 [debug] handled notification client -> server workspace/didChangeConfiguration in 128µs
+16:54:32.254 [debug] handled notification client -> server workspace/didChangeConfiguration in 718µs
+16:54:32.317 [debug] handled notification client -> server workspace/didChangeConfiguration in 87µs
+16:54:32.337 [debug] handled notification client -> server workspace/didChangeConfiguration in 79µs
+16:54:32.413 [debug] handled notification client -> server workspace/didChangeConfiguration in 111µs
+16:54:32.413 [debug] handled notification client -> server workspace/didChangeConfiguration in 141µs
+16:54:32.662 [debug] handled notification client -> server workspace/didChangeConfiguration in 95µs
+16:54:32.692 [debug] handled notification client -> server workspace/didChangeConfiguration in 125µs
+16:54:32.896 [debug] handled notification client -> server workspace/didChangeConfiguration in 89µs
+16:54:32.913 [debug] handled notification client -> server workspace/didChangeConfiguration in 99µs
+16:54:33.089 [debug] handled notification client -> server workspace/didChangeConfiguration in 91µs
+16:54:33.099 [debug] handled notification client -> server workspace/didChangeConfiguration in 88µs
+16:54:33.309 [debug] handled notification client -> server workspace/didChangeConfiguration in 89µs
+16:54:33.316 [debug] handled notification client -> server workspace/didChangeConfiguration in 87µs
+16:54:33.457 [debug] handled notification client -> server workspace/didChangeConfiguration in 132µs
+16:54:33.468 [debug] handled notification client -> server workspace/didChangeConfiguration in 95µs
+16:54:33.643 [debug] handled notification client -> server workspace/didChangeConfiguration in 93µs
+16:54:33.657 [debug] handled notification client -> server workspace/didChangeConfiguration in 86µs
+16:54:33.811 [debug] handled notification client -> server workspace/didChangeConfiguration in 99µs
+16:54:33.854 [debug] handled notification client -> server workspace/didChangeConfiguration in 142µs
+16:54:33.972 [debug] handled notification client -> server workspace/didChangeConfiguration in 123µs
+16:54:33.989 [debug] handled notification client -> server workspace/didChangeConfiguration in 86µs
+16:54:34.119 [debug] handled notification client -> server workspace/didChangeConfiguration in 149µs
+16:54:34.129 [debug] handled notification client -> server workspace/didChangeConfiguration in 82µs
+16:54:34.232 [debug] handled notification client -> server workspace/didChangeConfiguration in 377µs
+16:54:34.242 [debug] handled notification client -> server workspace/didChangeConfiguration in 111µs
+16:54:34.352 [debug] handled notification client -> server workspace/didChangeConfiguration in 84µs
+16:54:34.363 [debug] handled notification client -> server workspace/didChangeConfiguration in 87µs
+16:54:34.504 [debug] handled notification client -> server workspace/didChangeConfiguration in 92µs
+16:54:34.520 [debug] handled notification client -> server workspace/didChangeConfiguration in 144µs
+16:54:34.965 [debug] handled notification client -> server workspace/didChangeConfiguration in 168µs
+16:54:34.976 [debug] handled notification client -> server workspace/didChangeConfiguration in 83µs
+16:54:35.223 [debug] handled notification client -> server workspace/didChangeConfiguration in 102µs
+16:54:35.237 [debug] handled notification client -> server workspace/didChangeConfiguration in 85µs
+16:54:35.788 [debug] handled notification client -> server workspace/didChangeConfiguration in 91µs
+16:54:35.796 [debug] handled notification client -> server workspace/didChangeConfiguration in 84µs
+16:54:36.097 [debug] handled notification client -> server workspace/didChangeConfiguration in 101µs
+16:54:36.110 [debug] handled notification client -> server workspace/didChangeConfiguration in 91µs
+16:54:36.290 [debug] handled notification client -> server workspace/didChangeConfiguration in 110µs
+16:54:36.295 [debug] handled notification client -> server workspace/didChangeConfiguration in 149µs
+16:54:37.678 [debug] handled notification client -> server workspace/didChangeConfiguration in 311µs
+16:54:37.694 [debug] handled notification client -> server workspace/didChangeConfiguration in 125µs
+16:54:37.979 [debug] handled notification client -> server workspace/didChangeConfiguration in 181µs
+16:54:37.991 [debug] handled notification client -> server workspace/didChangeConfiguration in 103µs
+16:54:38.305 [debug] handled notification client -> server workspace/didChangeConfiguration in 115µs
+16:54:38.315 [debug] handled notification client -> server workspace/didChangeConfiguration in 127µs
+16:54:38.663 [debug] handled notification client -> server workspace/didChangeConfiguration in 186µs
+16:54:38.675 [debug] handled notification client -> server workspace/didChangeConfiguration in 153µs
+16:54:40.169 [debug] handled notification client -> server workspace/didChangeConfiguration in 2ms
+16:54:40.289 [debug] handled notification client -> server workspace/didChangeConfiguration in 129µs
+16:54:40.495 [debug] handled notification client -> server workspace/didChangeConfiguration in 623µs
+16:54:40.495 [debug] handled notification client -> server workspace/didChangeConfiguration in 229µs
+17:07:50.015 [debug] handled notification client -> server workspace/didChangeConfiguration in 1ms
+17:07:50.036 [debug] handled notification client -> server workspace/didChangeConfiguration in 2ms
+17:07:50.934 [debug] handled notification client -> server workspace/didChangeConfiguration in 168µs
+17:07:50.950 [debug] handled notification client -> server workspace/didChangeConfiguration in 98µs
+17:07:52.017 [debug] handled notification client -> server workspace/didChangeConfiguration in 148µs
+17:07:52.033 [debug] handled notification client -> server workspace/didChangeConfiguration in 236µs
+17:07:52.619 [debug] handled notification client -> server workspace/didChangeConfiguration in 216µs
+17:07:52.635 [debug] handled notification client -> server workspace/didChangeConfiguration in 138µs
+17:07:53.694 [debug] handled notification client -> server workspace/didChangeConfiguration in 151µs
+17:07:53.717 [debug] handled notification client -> server workspace/didChangeConfiguration in 173µs
+17:07:53.963 [debug] handled notification client -> server workspace/didChangeConfiguration in 87µs
+17:07:53.984 [debug] handled notification client -> server workspace/didChangeConfiguration in 152µs
+17:07:54.186 [debug] handled notification client -> server workspace/didChangeConfiguration in 126µs
+17:07:54.196 [debug] handled notification client -> server workspace/didChangeConfiguration in 88µs
+17:07:54.917 [debug] handled notification client -> server workspace/didChangeConfiguration in 176µs
+17:07:54.934 [debug] handled notification client -> server workspace/didChangeConfiguration in 147µs
+17:07:56.021 [debug] handled notification client -> server workspace/didChangeConfiguration in 159µs
+17:07:56.033 [debug] handled notification client -> server workspace/didChangeConfiguration in 114µs
+17:07:56.134 [debug] handled notification client -> server workspace/didChangeConfiguration in 136µs
+17:07:56.152 [debug] handled notification client -> server workspace/didChangeConfiguration in 124µs
+17:07:56.767 [debug] handled notification client -> server workspace/didChangeConfiguration in 376µs
+17:07:56.786 [debug] handled notification client -> server workspace/didChangeConfiguration in 121µs
+17:07:57.424 [debug] handled notification client -> server workspace/didChangeConfiguration in 126µs
+17:07:57.448 [debug] handled notification client -> server workspace/didChangeConfiguration in 193µs
+17:07:57.740 [debug] handled notification client -> server workspace/didChangeConfiguration in 99µs
+17:07:57.750 [debug] handled notification client -> server workspace/didChangeConfiguration in 99µs
+17:58:21.864 [debug] handled notification client -> server workspace/didChangeConfiguration in 10ms
+17:58:21.871 [debug] handled notification client -> server workspace/didChangeConfiguration in 348µs
+17:58:23.274 [debug] handled notification client -> server workspace/didChangeConfiguration in 138µs
+17:58:23.286 [debug] handled notification client -> server workspace/didChangeConfiguration in 161µs
+17:58:56.797 [error] ################## Could not open file:///Users/oscarzwagers/Developer/Projects/phutilx/lib/phutilx.ex {:error, :already_open}
+17:58:56.797 [error] ################## Could not open file:///Users/oscarzwagers/Developer/Projects/phutilx/lib/json.ex {:error, :already_open}
+17:58:56.813 [error] Failed to handle textDocument/didOpen, {{:error, :already_open}, %XPExpert.State{configuration: %XPExpert.Configuration{project: %XPForge.Project{root_uri: "file:///Users/oscarzwagers/Developer/Projects/phutilx", mix_exs_uri: "file:///Users/oscarzwagers/Developer/Projects/phutilx/mix.exs", mix_project?: true, mix_env: nil, mix_target: nil, env_variables: %{}, project_module: nil, entropy: 38609}, support: %XPExpert.Configuration.Support{code_action_dynamic_registration: true, hierarchical_symbols: true, snippet: true, deprecated: false, tags: false, signature_help: %XPGenLSP.Structures.SignatureHelpClientCapabilities{context_support: nil, signature_information: %{documentation_format: ["markdown", "plaintext"], parameter_information: %{label_offset_support: true}, active_parameter_support: true}, dynamic_registration: true}, work_done_progress: true}, client_name: "Zed", additional_watched_extensions: nil, dialyzer_enabled?: false}, initialized?: true, engine_initialized?: false, shutdown_received?: false, in_flight_requests: %{}}}
+17:58:56.813 [error] Failed to handle textDocument/didOpen, {{:error, :already_open}, %XPExpert.State{configuration: %XPExpert.Configuration{project: %XPForge.Project{root_uri: "file:///Users/oscarzwagers/Developer/Projects/phutilx", mix_exs_uri: "file:///Users/oscarzwagers/Developer/Projects/phutilx/mix.exs", mix_project?: true, mix_env: nil, mix_target: nil, env_variables: %{}, project_module: nil, entropy: 38609}, support: %XPExpert.Configuration.Support{code_action_dynamic_registration: true, hierarchical_symbols: true, snippet: true, deprecated: false, tags: false, signature_help: %XPGenLSP.Structures.SignatureHelpClientCapabilities{context_support: nil, signature_information: %{documentation_format: ["markdown", "plaintext"], parameter_information: %{label_offset_support: true}, active_parameter_support: true}, dynamic_registration: true}, work_done_progress: true}, client_name: "Zed", additional_watched_extensions: nil, dialyzer_enabled?: false}, initialized?: true, engine_initialized?: false, shutdown_received?: false, in_flight_requests: %{}}}
+17:58:56.813 [debug] handled notification client -> server textDocument/didOpen in 31ms
+17:58:56.813 [debug] handled notification client -> server textDocument/didOpen in 20ms
+17:58:56.815 [error] ################## Could not open file:///Users/oscarzwagers/Developer/Projects/phutilx/lib/inertia/controller.ex {:error, :already_open}
+17:58:56.815 [error] Failed to handle textDocument/didOpen, {{:error, :already_open}, %XPExpert.State{configuration: %XPExpert.Configuration{project: %XPForge.Project{root_uri: "file:///Users/oscarzwagers/Developer/Projects/phutilx", mix_exs_uri: "file:///Users/oscarzwagers/Developer/Projects/phutilx/mix.exs", mix_project?: true, mix_env: nil, mix_target: nil, env_variables: %{}, project_module: nil, entropy: 38609}, support: %XPExpert.Configuration.Support{code_action_dynamic_registration: true, hierarchical_symbols: true, snippet: true, deprecated: false, tags: false, signature_help: %XPGenLSP.Structures.SignatureHelpClientCapabilities{context_support: nil, signature_information: %{documentation_format: ["markdown", "plaintext"], parameter_information: %{label_offset_support: true}, active_parameter_support: true}, dynamic_registration: true}, work_done_progress: true}, client_name: "Zed", additional_watched_extensions: nil, dialyzer_enabled?: false}, initialized?: true, engine_initialized?: false, shutdown_received?: false, in_flight_requests: %{}}}
+17:58:56.815 [debug] handled notification client -> server textDocument/didOpen in 1ms
+17:58:56.815 [error] ################## Could not open file:///Users/oscarzwagers/Developer/Projects/phutilx/lib/database/paginate.ex {:error, :already_open}
+17:58:56.815 [error] Failed to handle textDocument/didOpen, {{:error, :already_open}, %XPExpert.State{configuration: %XPExpert.Configuration{project: %XPForge.Project{root_uri: "file:///Users/oscarzwagers/Developer/Projects/phutilx", mix_exs_uri: "file:///Users/oscarzwagers/Developer/Projects/phutilx/mix.exs", mix_project?: true, mix_env: nil, mix_target: nil, env_variables: %{}, project_module: nil, entropy: 38609}, support: %XPExpert.Configuration.Support{code_action_dynamic_registration: true, hierarchical_symbols: true, snippet: true, deprecated: false, tags: false, signature_help: %XPGenLSP.Structures.SignatureHelpClientCapabilities{context_support: nil, signature_information: %{documentation_format: ["markdown", "plaintext"], parameter_information: %{label_offset_support: true}, active_parameter_support: true}, dynamic_registration: true}, work_done_progress: true}, client_name: "Zed", additional_watched_extensions: nil, dialyzer_enabled?: false}, initialized?: true, engine_initialized?: false, shutdown_received?: false, in_flight_requests: %{}}}
+17:58:56.815 [debug] handled notification client -> server textDocument/didOpen in 1ms
+17:58:56.817 [error] ################## Could not open file:///Users/oscarzwagers/Developer/Projects/phutilx/mix.exs {:error, :already_open}
+17:58:56.817 [error] Failed to handle textDocument/didOpen, {{:error, :already_open}, %XPExpert.State{configuration: %XPExpert.Configuration{project: %XPForge.Project{root_uri: "file:///Users/oscarzwagers/Developer/Projects/phutilx", mix_exs_uri: "file:///Users/oscarzwagers/Developer/Projects/phutilx/mix.exs", mix_project?: true, mix_env: nil, mix_target: nil, env_variables: %{}, project_module: nil, entropy: 38609}, support: %XPExpert.Configuration.Support{code_action_dynamic_registration: true, hierarchical_symbols: true, snippet: true, deprecated: false, tags: false, signature_help: %XPGenLSP.Structures.SignatureHelpClientCapabilities{context_support: nil, signature_information: %{documentation_format: ["markdown", "plaintext"], parameter_information: %{label_offset_support: true}, active_parameter_support: true}, dynamic_registration: true}, work_done_progress: true}, client_name: "Zed", additional_watched_extensions: nil, dialyzer_enabled?: false}, initialized?: true, engine_initialized?: false, shutdown_received?: false, in_flight_requests: %{}}}
+17:58:56.817 [debug] handled notification client -> server textDocument/didOpen in 1ms
+17:58:56.817 [error] ################## Could not open file:///Users/oscarzwagers/Developer/Projects/phutilx/lib/inertia/errors.ex {:error, :already_open}
+17:58:56.818 [error] Failed to handle textDocument/didOpen, {{:error, :already_open}, %XPExpert.State{configuration: %XPExpert.Configuration{project: %XPForge.Project{root_uri: "file:///Users/oscarzwagers/Developer/Projects/phutilx", mix_exs_uri: "file:///Users/oscarzwagers/Developer/Projects/phutilx/mix.exs", mix_project?: true, mix_env: nil, mix_target: nil, env_variables: %{}, project_module: nil, entropy: 38609}, support: %XPExpert.Configuration.Support{code_action_dynamic_registration: true, hierarchical_symbols: true, snippet: true, deprecated: false, tags: false, signature_help: %XPGenLSP.Structures.SignatureHelpClientCapabilities{context_support: nil, signature_information: %{documentation_format: ["markdown", "plaintext"], parameter_information: %{label_offset_support: true}, active_parameter_support: true}, dynamic_registration: true}, work_done_progress: true}, client_name: "Zed", additional_watched_extensions: nil, dialyzer_enabled?: false}, initialized?: true, engine_initialized?: false, shutdown_received?: false, in_flight_requests: %{}}}
+17:58:56.818 [debug] handled notification client -> server textDocument/didOpen in 1ms
+17:58:56.818 [error] ################## Could not open file:///Users/oscarzwagers/Developer/Projects/phutilx/deps/inertia/lib/inertia/controller.ex {:error, :already_open}
+17:58:56.824 [error] Failed to handle textDocument/didOpen, {{:error, :already_open}, %XPExpert.State{configuration: %XPExpert.Configuration{project: %XPForge.Project{root_uri: "file:///Users/oscarzwagers/Developer/Projects/phutilx", mix_exs_uri: "file:///Users/oscarzwagers/Developer/Projects/phutilx/mix.exs", mix_project?: true, mix_env: nil, mix_target: nil, env_variables: %{}, project_module: nil, entropy: 38609}, support: %XPExpert.Configuration.Support{code_action_dynamic_registration: true, hierarchical_symbols: true, snippet: true, deprecated: false, tags: false, signature_help: %XPGenLSP.Structures.SignatureHelpClientCapabilities{context_support: nil, signature_information: %{documentation_format: ["markdown", "plaintext"], parameter_information: %{label_offset_support: true}, active_parameter_support: true}, dynamic_registration: true}, work_done_progress: true}, client_name: "Zed", additional_watched_extensions: nil, dialyzer_enabled?: false}, initialized?: true, engine_initialized?: false, shutdown_received?: false, in_flight_requests: %{}}}
+17:58:56.824 [debug] handled notification client -> server textDocument/didOpen in 5ms
+17:58:57.116 [debug] handled notification client -> server workspace/didChangeConfiguration in 134µs
+17:58:57.137 [debug] handled notification client -> server workspace/didChangeConfiguration in 120µs
+17:58:57.155 [debug] handled notification client -> server workspace/didChangeConfiguration in 122µs
+17:58:57.374 [debug] sent notification server -> client window/logMessage
+17:58:57.375 [debug] sent notification server -> client window/logMessage
+17:58:57.375 [debug] handled request client -> server textDocument/codeAction in 922µs
+17:58:57.375 [debug] sent notification server -> client window/logMessage
+17:58:57.375 [debug] handled request client -> server textDocument/codeAction in 315µs
+17:58:57.375 [debug] handled request client -> server textDocument/codeAction in 8ms
+17:58:57.375 [debug] sent notification server -> client window/logMessage
+17:58:57.375 [debug] handled request client -> server textDocument/codeAction in 212µs
+17:58:57.375 [debug] sent notification server -> client window/logMessage
+17:58:57.375 [debug] handled request client -> server textDocument/codeAction in 549µs
+17:58:57.375 [debug] sent notification server -> client window/logMessage
+17:58:57.375 [debug] handled request client -> server textDocument/codeAction in 427µs
+17:58:57.399 [debug] sent notification server -> client window/logMessage
+17:58:57.399 [debug] handled request client -> server textDocument/codeLens in 443µs
+17:58:57.399 [debug] sent notification server -> client window/logMessage
+17:58:57.399 [debug] handled request client -> server textDocument/codeLens in 401µs
+17:58:57.400 [debug] sent notification server -> client window/logMessage
+17:58:57.400 [debug] handled request client -> server textDocument/codeLens in 471µs
+17:58:57.400 [debug] sent notification server -> client window/logMessage
+17:58:57.400 [debug] handled request client -> server textDocument/codeLens in 232µs
+17:58:57.400 [debug] sent notification server -> client window/logMessage
+17:58:57.400 [debug] handled request client -> server textDocument/codeLens in 229µs
+17:58:57.400 [debug] sent notification server -> client window/logMessage
+17:58:57.400 [debug] handled request client -> server textDocument/codeLens in 95µs
+17:58:58.446 [debug] handled notification client -> server workspace/didChangeConfiguration in 132µs
+17:58:58.446 [debug] handled notification client -> server workspace/didChangeConfiguration in 233µs
+17:58:59.063 [debug] handled notification client -> server workspace/didChangeConfiguration in 279µs
+17:58:59.085 [debug] handled notification client -> server workspace/didChangeConfiguration in 157µs
+17:58:59.371 [debug] handled notification client -> server workspace/didChangeConfiguration in 119µs
+17:58:59.386 [debug] handled notification client -> server workspace/didChangeConfiguration in 108µs
+18:00:57.385 [debug] handled notification client -> server $/cancelRequest in 1ms
+18:00:57.386 [debug] handled notification client -> server $/cancelRequest in 184µs
+18:00:57.386 [debug] handled notification client -> server $/cancelRequest in 53µs
+18:00:57.386 [debug] handled notification client -> server $/cancelRequest in 61µs
+18:00:57.386 [debug] handled notification client -> server $/cancelRequest in 43µs
+18:00:57.386 [debug] handled notification client -> server $/cancelRequest in 39µs
+18:00:57.416 [debug] handled notification client -> server $/cancelRequest in 119µs
+18:00:57.417 [debug] handled notification client -> server $/cancelRequest in 52µs
+18:00:57.417 [debug] handled notification client -> server $/cancelRequest in 145µs
+18:00:57.417 [debug] handled notification client -> server $/cancelRequest in 50µs
+18:00:57.418 [debug] handled notification client -> server $/cancelRequest in 132µs
+18:00:57.420 [debug] handled notification client -> server $/cancelRequest in 93µs
+18:20:27.778 [debug] sent notification server -> client window/logMessage
+18:20:27.779 [info] Shutting down
+18:20:27.799 [error] ** (XPGenLSP.InvalidResponse) Invalid response for request shutdown.
+
+Response: {:ok, nil}
+Errors: "expected either null or a %XPGenLSP.ErrorResponse{}"
+

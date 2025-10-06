@@ -58,7 +58,6 @@ defmodule Mix.Tasks.Ecto.Gen.Schemas do
         {{mod, assoc_name}, {assoc.related, assoc.cardinality}}
       end)
       |> Map.new()
-      |> IO.inspect()
 
     schema_indirect_associations =
       schema_associations
@@ -67,7 +66,7 @@ defmodule Mix.Tasks.Ecto.Gen.Schemas do
       end)
       |> Enum.map(fn {mod, {assoc_name, assoc}} ->
         {related, _} =
-          cycle_through(schema_direct_associations, mod, assoc.through) |> IO.inspect()
+          cycle_through(schema_direct_associations, mod, assoc.through)
 
         {{mod, assoc_name}, {related, :many}}
       end)
@@ -80,7 +79,21 @@ defmodule Mix.Tasks.Ecto.Gen.Schemas do
       end)
       |> Enum.group_by(fn {mod, _} -> mod end, fn {_, assoc} -> assoc end)
       |> Map.new()
-      |> IO.inspect()
+
+    all_schema_embeds =
+      schemas
+      |> Enum.map(fn %{module: mod, embeds: embeds} ->
+        for {embed_name, embed} <- embeds do
+          {mod, {embed_name, embed}}
+        end
+      end)
+      |> List.flatten()
+      |> Enum.uniq()
+      |> Enum.map(fn {mod, {embed_name, embed}} ->
+        {mod, {embed_name, embed.related, embed.cardinality}}
+      end)
+      |> Enum.group_by(fn {mod, _} -> mod end, fn {_, embed} -> embed end)
+      |> Map.new()
 
     schemas
     |> Enum.map(fn %{module: mod, fields: fields} ->
@@ -89,11 +102,17 @@ defmodule Mix.Tasks.Ecto.Gen.Schemas do
         |> Enum.map(fn {name, rel, card} -> {name, {rel, card}} end)
         |> Map.new()
 
+      embed =
+        Map.get(all_schema_embeds, mod, %{})
+        |> Enum.map(fn {name, rel, card} -> {name, {rel, card}} end)
+        |> Map.new()
+
       fields = Enum.map(fields, &to_typescript(:field, &1, app_module))
       assoc = Enum.map(assoc, &to_typescript(:association, &1, app_module))
+      embed = Enum.map(embed, &to_typescript(:embed, &1, app_module))
 
       {types, imports} =
-        (fields ++ assoc)
+        (fields ++ assoc ++ embed)
         |> Enum.map(fn %{line: line, import: import} -> {line, import} end)
         |> Enum.unzip()
 
@@ -116,7 +135,9 @@ defmodule Mix.Tasks.Ecto.Gen.Schemas do
         |> Enum.uniq()
         |> Enum.reject(fn import -> import == "" end)
         |> Enum.reject(fn import ->
-          String.contains?(import, mod_to_import(mod, app_module))
+          import
+          |> String.trim_trailing("';")
+          |> String.ends_with?(mod_to_import(mod, app_module))
         end)
         |> Enum.join("\n")
 
@@ -181,17 +202,19 @@ defmodule Mix.Tasks.Ecto.Gen.Schemas do
   end
 
   defp get_types_schema(mod) do
+    embeds = mod.__schema__(:embeds)
+    embeds_and_types = for embed <- embeds, into: %{}, do: {embed, mod.__schema__(:embed, embed)}
+
     fields = mod.__schema__(:fields)
+    fields = Enum.filter(fields, fn field -> field not in embeds end)
     fields_and_types = for field <- fields, into: %{}, do: {field, mod.__schema__(:type, field)}
+
     associations = mod.__schema__(:associations)
 
     associations_and_types =
       for assoc <- associations, into: %{} do
         {assoc, mod.__schema__(:association, assoc)}
       end
-
-    embeds = mod.__schema__(:embeds)
-    embeds_and_types = for embed <- embeds, into: %{}, do: {embed, mod.__schema__(:embed, embed)}
 
     %{
       module: mod,
@@ -209,7 +232,8 @@ defmodule Mix.Tasks.Ecto.Gen.Schemas do
     %{line: "#{key}: #{type_to_typescript(type)};", import: ""}
   end
 
-  def to_typescript(:association, {key, {mod, card}}, app_module) do
+  def to_typescript(field_type, {key, {mod, card}}, app_module)
+      when field_type in [:association, :embed] do
     type_name = mod_to_type_name(mod)
 
     ts_type =
@@ -243,5 +267,7 @@ defmodule Mix.Tasks.Ecto.Gen.Schemas do
     mappings |> Keyword.values() |> Enum.map(fn item -> "'#{item}'" end) |> Enum.join(" | ")
   end
 
-  def type_to_typescript(_), do: "any"
+  def type_to_typescript(_) do
+    "any"
+  end
 end
