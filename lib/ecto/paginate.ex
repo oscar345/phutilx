@@ -1,11 +1,11 @@
 defmodule Phutilx.Ecto.Paginate do
-  defstruct values: nil, page: 1, size: 10, count: 0
+  defstruct items: nil, page: 1, size: 10, total: 0
 
   @type t :: %__MODULE__{
-          values: list(),
+          items: list(),
           page: integer(),
           size: integer(),
-          count: integer()
+          total: integer()
         }
 
   @moduledoc """
@@ -84,16 +84,16 @@ defmodule Phutilx.Ecto.Paginate do
     end
   end
 
-  @doc"""
+  @doc """
   Updates the `:values` field of the given pagination struct using the provided update function.
 
   ## Examples
 
-      iex> pagination = %Phutilx.Ecto.Paginate{values: [1, 2, 3], page: 1, size: 3, count: 3}
-      iex> Phutilx.Ecto.Paginate.update_values(pagination, fn values -> Enum.map(values, &(&1 * 2)) end)
-      %Phutilx.Ecto.Paginate{values: [2, 4, 6], page: 1, size: 3, count: 3}
+      iex> pagination = %Phutilx.Ecto.Paginate{values: [1, 2, 3], page: 1, size: 3, total: 3}
+      iex> Phutilx.Ecto.Paginate.update_items(pagination, fn items -> Enum.map(items, &(&1 * 2)) end)
+      %Phutilx.Ecto.Paginate{items: [2, 4, 6], page: 1, size: 3, total: 3}
   """
-  def update_values(%__MODULE__{} = pagination, update_fn) do
-    update_in(pagination, [:values], update_fn)
+  def update_items(%__MODULE__{} = pagination, update_fn) do
+    update_in(pagination, [Access.key!(:items)], update_fn)
   end
 end

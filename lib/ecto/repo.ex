@@ -5,7 +5,7 @@ defmodule Phutilx.Ecto.Repo do
           Phutilx.Ecto.Paginate.t()
 
   def paginate(repo, query, %{page: page, size: size}) do
-    values =
+    items =
       query
       |> limit(^size)
       |> offset((^page - 1) * ^size)
@@ -14,10 +14,10 @@ defmodule Phutilx.Ecto.Repo do
     count = query |> repo.aggregate(:count, :id)
 
     %Phutilx.Ecto.Paginate{
-      values: values,
+      items: items,
       page: page,
       size: size,
-      count: count
+      total: count
     }
   end
 end

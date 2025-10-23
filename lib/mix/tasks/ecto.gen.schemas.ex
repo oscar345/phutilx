@@ -163,6 +163,17 @@ defmodule Mix.Tasks.Ecto.Gen.Schemas do
       File.mkdir_p!(dir)
       File.write!(full_path, content)
     end)
+
+    full_path = Path.join(path, "util.ts")
+
+    File.write(full_path, """
+    export type Pagination<T> = {
+      items: T[];
+      total: number;
+      page: number;
+      size: number;
+    };
+    """)
   end
 
   def mod_to_filename(mod, app_module) do
@@ -206,6 +217,8 @@ defmodule Mix.Tasks.Ecto.Gen.Schemas do
     embeds_and_types = for embed <- embeds, into: %{}, do: {embed, mod.__schema__(:embed, embed)}
 
     fields = mod.__schema__(:fields)
+    virtual_fields = mod.__schema__(:virtual_fields)
+    fields = fields ++ virtual_fields
     fields = Enum.filter(fields, fn field -> field not in embeds end)
     fields_and_types = for field <- fields, into: %{}, do: {field, mod.__schema__(:type, field)}
 
